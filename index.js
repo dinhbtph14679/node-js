@@ -10,7 +10,6 @@ const products = require('./routers/products');
 const productsdetail = require('./routers/detailProduct');
 
 
-const res = require('express/lib/response')
 
 // su dung router
 app.use(homeRoute);

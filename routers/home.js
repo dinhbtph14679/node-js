@@ -1,12 +1,12 @@
-const express = require('express');
-const home = express.Router();
+import express from 'express';
+const router = express.Router();
 
-home.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.send(`
-        <h1>Home Page</h1>
+        <h1 style="color: red">Home Page</h1>
         <p>Content text</p>
         <img src="https://live.staticflickr.com/4200/35328200091_8920666058_b.jpg"/>
     `)
 })
 
-module.exports = home;
+export default router;

@@ -1,11 +1,17 @@
 import express from 'express';
+import { createProduct, deleteProduct, listProduct, productDetail, updateProduct } from '../controllers/product';
 const router = express.Router();
 
-router.get('/products', (req, res) => {
-    res.send(`
-        <h1 style="color: red">Products Page</h1>
-        <img src="https://i.vietgiaitri.com/2021/1/1/son-tung-m-tp-vua-xuat-hien-luot-xem-livestream-countdown-tang-chong-mat-len-170000-nguoi-626-5485034.png" />
-    `)
-})
+
+
+router.get('/products', listProduct);
+
+router.get('/products/:id', productDetail);
+
+router.post('/products', createProduct);
+
+router.delete('/products/:id', deleteProduct);
+
+router.put('/products/:id', updateProduct);
 
 export default router;

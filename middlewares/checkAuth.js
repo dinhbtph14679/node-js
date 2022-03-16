@@ -1,4 +1,4 @@
-export const checkAuth = (req, res, next)=>{
+export const checkAuth = (request, response, next)=>{
     const isAuth = true;
     if (isAuth) {
         console.log("Xin chao admin");

@@ -1,21 +1,9 @@
 import Product from "../models/product";
 
 
-
-// const products = [
-//     {
-//         "id": 1,
-//         "name": "dinh dep trai"
-//     },
-//     {
-//         "id": 2,
-//         "name": "dinh dep trai sieu cap vip pro"
-//     }
-// ]
-
-export const listProduct = (request, response) => {
+export const listProduct = async (request, response) => {
     try {
-        const product = Product.find().exec();
+        const product = await Product.find().exec();
         response.json(product);
 
     } catch (error) {
@@ -23,19 +11,31 @@ export const listProduct = (request, response) => {
     }
     // response.json(products);
 }
-export const productDetail = (request, response) => {
-    const product = products.find(item => item.id === +request.params.id);
-    response.json(product);
+export const productDetail = async (request, response) => {
+   try {
+        const product = await Product.findOne({_id:request.params.id}).exec();
+        response.json(product);
+   } catch (error) {
+        response.status(400).json({message: "K tim thay data"})
+   }
 }
 
-export const createProduct = (request, response) =>{
-    products.push(request.body);
-    response.json(products);
+export const createProduct = async (request, response) =>{
+    try {
+        const product = await Product(request.body).save();
+        response.json(product);  
+    } catch (error) {
+        response.status(400).json({message: "Khong the tao moi"})
+    }
 }
 
-export const deleteProduct = (request, response) => {
-    const product = products.filter(item => item.id != request.params.id);
-    response.json(product);
+export const deleteProduct = async (request, response) => {
+    try {
+        const product = await Product.findOneAndDelete({}).exec();
+        response.json(product);  
+    } catch (error) {
+        response.status(400).json({message: "Khong the xoa"})
+    }
 }
 
 export const updateProduct = (request, response) => {

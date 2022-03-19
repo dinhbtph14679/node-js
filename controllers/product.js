@@ -9,8 +9,8 @@ export const listProduct = async (request, response) => {
     } catch (error) {
         response.status(400).json({message: "K tim thay data"})
     }
-    // response.json(products);
 }
+
 export const productDetail = async (request, response) => {
    try {
         const product = await Product.findOne({_id:request.params.id}).exec();
@@ -38,6 +38,11 @@ export const deleteProduct = async (request, response) => {
     }
 }
 
-export const updateProduct = (request, response) => {
-    response.json(products.map(item => item.id === +request.params.id ? request.body : item))
+export const updateProduct = async (request, response) => {
+    try {
+        const product = await Product.findOneAndUpdate({_id:request.params.id},request.body, {new:true});
+        response.json(product);
+    } catch (error) {
+        response.status(400).json({message: "Update khong thanh cong"})
+    }
 }

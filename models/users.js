@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import crypto , {createHmac} from 'crypto'
 
-const authSchema =  new mongoose.Schema({
+const userSchema =  new mongoose.Schema({
     name:{
         type: String,
         trim:true,
@@ -14,6 +15,26 @@ const authSchema =  new mongoose.Schema({
         type: String,
         required:true
     }
-},{timestamps:true})
+})
 
-export default mongoose.model('User', authSchema)
+userSchema.methods = {
+    encrytPassword(password){
+        if (!password) return
+        try {
+            return createHmac("sha256", "123456").update(password).digest("hex");
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+userSchema.pre("save", function(next){
+    try {
+        this.password = this.encrytPassword(this.password);
+        next()
+    } catch (error) {
+        
+    }
+})
+
+export default mongoose.model('User', userSchema);

@@ -1,24 +1,34 @@
 import User from '../models/users'
 
 export const singup = async (request, response) => {
-    const {email, name, password} = request.body
+    const { name, email, password} = request.body;
     try {
-        const exitsUser = await User.findOne({email}).exec();
-        if (exitsUser) {
+        const check = await User.findOne({email}).exec()
+        if (check) {
             return response.status(400).json({
                 message: "email da ton tai"
             })
         }
         const user = await User(request.body).save()
         response.json({
-            users: {
+            users:{
                 _id: user._id,
-                email:user.email,
-                name: user.name
+                name: user.name,
+                email: user.email
             }
         })
     } catch (error) {
-       console.log(error); 
+        console.log(error);
     }
 }
-export const singin = () => {}
+export const singin = async (request, response) => {}
+
+export const deleteUser = async (request, response) => {
+    try {
+        const user = User.findOneAndDelete({}).exec()
+        response.json(user)
+    } catch (error) {
+        response.status(400).json({message: "k xoa duoc user"})
+    }
+}
+

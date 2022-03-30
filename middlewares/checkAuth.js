@@ -24,6 +24,7 @@ export const isAuth = (req, res, next) => {
     }
     next();
 }
+
 export const isAdmin = (req, res, next) => {
     if(req.profile.role == 0) {
         res.status(401).json({

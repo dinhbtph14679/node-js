@@ -26,7 +26,7 @@ const userSchema =  new mongoose.Schema({
 
 userSchema.methods = {
     authenticate(password){
-        return this.password === this.encrytPassword(password)
+        return this.password == this.encrytPassword(password)
     },
     encrytPassword(password){
         if (!password) return

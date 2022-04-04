@@ -31,7 +31,7 @@ export const createProduct = async (request, response) =>{
 
 export const deleteProduct = async (request, response) => {
     try {
-        const product = await Product.findOneAndDelete({}).exec();
+        const product = await Product.findByIdAndDelete(request.params.id).exec();
         response.json(product);  
     } catch (error) {
         response.status(400).json({message: "Khong the xoa"})

@@ -12,7 +12,7 @@ export const checkAuth = (req, res,next) => {
 export const requiredSigin = expressJWT({
     algorithms: ['HS256'],
     secret: '123456',
-    requestProperty: "auth" // req.auth
+    requestProperty: "auth"
 });
 
 export const isAuth = (req, res, next) => {

@@ -15,10 +15,11 @@ app.use("/api",checkAuth,products);
 app.use("/api", category);
 app.use('/api', auth)
 
-mongoose.connect('mongodb://localhost:27017/we16308');
+mongoose.connect('mongodb://localhost:27017/we16308',() =>{
+    console.log("Connect MongoDb succsessfully!");
+});
 
 const PORT = 8000
-
 app.listen(PORT, () =>{
-    console.log(`Server run start port ${PORT}`);
+    console.log(`Server is running in port ${PORT}`);
 });

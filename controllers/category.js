@@ -26,9 +26,7 @@ export const createCategory = async (request, response) => {
 export const listCategoryDetail = async (request,response) =>{
     try {
         const category = await Category.findOne({_id:request.params.id}).exec();
-        const product = await Product.find({category}).exec()
-        // const product = await Product.find({category}).populate("category").exec()
-        // const product = await Product.find({category}).select('-category').exec()
+        const product = await Product.find({category}).select('name').exec()
         response.json({ category,product})
     } catch (error) {
         response.status(400).json({
@@ -50,11 +48,11 @@ export const updateCategory = async (request, response) => {
 
 export const deleteCategory = async (request, response) => {
     try {
-        const category = await Category.findOneAndDelete({}).exec();
+        const category = await Category.findOneAndDelete({_id:request.params.id}).exec();
         response.json(category);
     } catch (error) {
         response.status(400).json({
-            message: "K the hien thi moi du lieu"
+            message: "K the xoa danh muc"
         }) 
     }
 }

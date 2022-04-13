@@ -9,6 +9,14 @@ const productSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
+    description: {
+        type: String,
+        required: true
+    },
+    image: {
+        type: String,
+        default: "http://placeimg.com/640/480"
+    },
     category:{
         type:ObjectId,
         ref:'Category'

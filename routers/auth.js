@@ -5,4 +5,4 @@ const router = express.Router()
 router.post('/signup', singup);
 router.post('/signin', singin);
 
-export default router 
+export default router
